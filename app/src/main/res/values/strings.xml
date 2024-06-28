@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyBusiness</string>
+    <string name="my_business">Мои дела</string>
+    <string name="complete">Выполнено — %1$d</string>
+    <string name="save">сохранить</string>
+    <string name="smth_do">Что надо сделать…</string>
+    <string name="delete">Удалить</string>
 </resources>
