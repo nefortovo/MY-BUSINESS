@@ -54,7 +54,7 @@ fun DraggableItem(
                         y = 0,
                     )
                 }
-                .anchoredDraggable(state, Orientation.Horizontal, reverseDirection = true),
+                .anchoredDraggable(state = state, reverseDirection = true, orientation = Orientation.Horizontal) ,
             content = content
         )
     }

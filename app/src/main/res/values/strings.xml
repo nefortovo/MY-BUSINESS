@@ -5,4 +5,8 @@
     <string name="save">сохранить</string>
     <string name="smth_do">Что надо сделать…</string>
     <string name="delete">Удалить</string>
+    <string name="importance_low">Низкий</string>
+    <string name="importance_normal">Обычный</string>
+    <string name="importance_high">Высокий</string>
+    <string name="importance">Важность</string>
 </resources>

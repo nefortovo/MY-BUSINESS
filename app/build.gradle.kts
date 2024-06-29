@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.kotlinx.serialization)
     id ("kotlin-kapt")
 }
 
@@ -52,6 +53,7 @@ android {
 dependencies {
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.kotlinx.serialization.json)
     implementation (libs.androidx.navigation.compose)
     implementation(libs.androidx.foundation.android)
     implementation(libs.androidx.material3.android)
@@ -60,6 +62,9 @@ dependencies {
     implementation(libs.androidx.compose.material)
     kapt(libs.hilt.android.compiler)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(libs.retrofit)
+    debugImplementation (libs.androidx.ui.tooling)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)

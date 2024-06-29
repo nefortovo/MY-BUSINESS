@@ -8,23 +8,23 @@ import kotlinx.coroutines.flow.Flow
 class ToDoInteractorImpl(
     private val repository: IToDoRepository
 ) : IToDoInteractor {
-    override fun getToDoList(): Flow<List<ToDoModel>> {
+    override suspend fun getToDoList(): Flow<List<ToDoModel>> {
         return repository.getToDoList()
     }
 
-    override fun addToDoItem(item: ToDoModel) {
+    override suspend fun addToDoItem(item: ToDoModel) {
         return repository.addToDoItem(item)
     }
 
-    override fun editToDoItem(item: ToDoModel) {
+    override suspend fun editToDoItem(item: ToDoModel) {
         return repository.editToDoItem(item)
     }
 
-    override fun deleteToDoItem(item: ToDoModel) {
+    override suspend fun deleteToDoItem(item: ToDoModel) {
         return repository.deleteToDoItem(item)
     }
 
-    override fun getToDoItem(toDoId: Int): ToDoModel? {
+    override suspend fun getToDoItem(toDoId: String): ToDoModel? {
         return repository.getToDoItem(toDoId)
     }
 }
