@@ -18,7 +18,7 @@ class ToDoRepositoryImpl: IToDoRepository, BaseRepository() {
     private val farPastDate: LocalDate = currentDate.minusMonths(1)
 
     private val _toDoList = mutableListOf(
-        ToDoModel("1", "Task 1", Importance.LOW, futureDate, true, currentDate, LocalDateTime.now()),
+        ToDoModel("1", "FJKSDGNJKSFNSADJKFDSGJKFNDFJKSANDFJKDSGSNFJKDNFSJKDSLGNJLKDNFSJKLDSNDSJKLGNFJKGNFJKGNFDJKGNFDJKGNFDGJKNFDGJKFNDGJKFDNGJKDFNGJKDFGNJKFDGNJKFDGNFJKDGNDFJKGNDFJKGNDFJKLGNFDJKGNDFKJGNFDJKGNJKFDGNDFJKGNDFJKGNFJKDGNFJKDGNFJKDGNDFJKGNFDKJGN", Importance.LOW, futureDate, true, currentDate, LocalDateTime.now()),
         ToDoModel("2", "Task 2", Importance.LOW, futureDate, false, pastDate, LocalDateTime.now().plusMinutes(10)),
         ToDoModel("3", "Task 3", Importance.LOW, farFutureDate, true, currentDate, LocalDateTime.now().plusHours(1)),
         ToDoModel("4", "Task 4", Importance.LOW, pastDate, false, pastDate, LocalDateTime.now().plusDays(1)),

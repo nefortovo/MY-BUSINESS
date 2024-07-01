@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -62,6 +63,10 @@ fun ToDoCardScreen(
         mutableStateOf(false)
     }
 
+    val isTextFieldNotEmpty by remember(uiState.description) {
+        mutableStateOf(uiState.description.isNotEmpty())
+    }
+
     LaunchedEffect(Unit) {
         id?.let { viewModel.getItem(it) }
     }
@@ -88,9 +93,12 @@ fun ToDoCardScreen(
                 color = AppResources.colors.Blue,
                 modifier = Modifier
                     .clickable {
-                        viewModel.editElement()
-                        onBack()
+                        if (isTextFieldNotEmpty) {
+                            viewModel.editElement()
+                            onBack()
+                        }
                     }
+                    .alpha(if (isTextFieldNotEmpty) 1f else 0.5f)
             )
         }
 
@@ -144,8 +152,10 @@ fun ToDoCardScreen(
         )
 
         DatePicker(
-            date = uiState.toDoModel?.deadLine ?: LocalDate.now(),
-            onPickDate = { viewModel.changeDate(uiState.deadLine!!) },
+            date = uiState.deadLine ?: LocalDate.now(),
+            onPickDate = { newDate ->
+                viewModel.changeDate(newDate)
+            },
             modifier = Modifier
                 .defaultMinSize(minHeight = 72.dp)
         )

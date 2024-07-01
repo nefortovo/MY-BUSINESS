@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.mybusiness.domain.interactor.base.IToDoInteractor
 import com.example.mybusiness.domain.model.ToDoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,7 +38,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun fetchToDoList() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             toDoInteractor.getToDoList()
                 .collect {
                     _toDoList.value = it
@@ -46,13 +47,13 @@ class MainViewModel @Inject constructor(
     }
 
     fun deleteToDoItem(item: ToDoModel){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             toDoInteractor.deleteToDoItem(item)
         }
     }
 
     fun changeEnabledState(item: ToDoModel){
-        viewModelScope.launch{
+        viewModelScope.launch(Dispatchers.IO){
             toDoInteractor.editToDoItem(item.copy(enabled = item.enabled.not()))
 
         }

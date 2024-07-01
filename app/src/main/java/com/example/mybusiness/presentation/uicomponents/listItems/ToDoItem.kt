@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -83,6 +84,8 @@ fun ToDoItem(
                     append(element.text)
                 },
                 style = AppResources.typography.body.body0,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
                 color = AppResources.colors.LabelPrimary
             )
         }

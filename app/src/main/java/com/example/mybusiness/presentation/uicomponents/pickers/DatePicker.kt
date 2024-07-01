@@ -24,50 +24,45 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+
 @Composable
 fun DatePicker(
     date: LocalDate,
-    onPickDate: (Date) -> Unit,
+    onPickDate: (LocalDate) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var selectedDate by remember { mutableStateOf(date) }
-    val context = LocalContext.current
-
-    val calendar = Calendar.getInstance()
-    val year = calendar.get(Calendar.YEAR)
-    val month = calendar.get(Calendar.MONTH)
-    val day = calendar.get(Calendar.DAY_OF_MONTH)
-
     val dateFormatter = remember {
         SimpleDateFormat("d MMMM yyyy", Locale("ru"))
     }
 
-    val datePickerDialog = DatePickerDialog(
-        context,
-        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            val selectedCalendar = Calendar.getInstance().apply {
-                set(year, month, dayOfMonth)
-            }
-            selectedDate = selectedCalendar.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-            onPickDate(selectedCalendar.time)
-        }, year, month, day
-    )
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
+    calendar.time = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())
+
+    val datePickerDialog = remember {
+        DatePickerDialog(
+            context,
+            { _, year, month, dayOfMonth ->
+                val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+                onPickDate(selectedDate)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
 
     Column(
         modifier = modifier
-            .clickable{datePickerDialog.show()}
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .clickable {
+                datePickerDialog.show()
+            }
+            .fillMaxWidth()
     ) {
-        Text(text = "Сделать до")
         Text(
-            text = dateFormatter.format(localDateToDate(selectedDate)),
+            text = dateFormatter.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())),
             style = MaterialTheme.typography.bodyLarge,
             color = AppResources.colors.Blue
         )
     }
-}
-
-fun localDateToDate(localDate: LocalDate): Date {
-    return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
 }

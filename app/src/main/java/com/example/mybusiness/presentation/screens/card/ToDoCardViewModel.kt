@@ -8,6 +8,7 @@ import com.example.mybusiness.domain.model.Importance
 import com.example.mybusiness.domain.model.ToDoModel
 import com.example.mybusiness.presentation.screens.card.model.ToDoCardUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -41,7 +42,7 @@ class ToDoCardViewModel @Inject constructor(
     }
 
     fun getItem(id: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val model = toDoInteractor.getToDoItem(id)
             _uiState.value = _uiState.value.copy(toDoModel = model)
             _uiState.update{ it.copy(description = model?.text ?: "")}
@@ -52,7 +53,7 @@ class ToDoCardViewModel @Inject constructor(
     }
 
     fun editElement(){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             with(uiState.value){
                 toDoInteractor.editToDoItem(ToDoModel(
                     id = toDoModel?.id ?: ToDoModel.UNDEFINED_ID,
