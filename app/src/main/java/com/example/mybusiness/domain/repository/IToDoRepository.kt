@@ -4,13 +4,13 @@ import com.example.mybusiness.domain.model.ToDoModel
 import kotlinx.coroutines.flow.Flow
 
 interface IToDoRepository {
-    fun getToDoList(): Flow<List<ToDoModel>>
+    suspend fun getToDoList(): Flow<List<ToDoModel>>
 
-    fun addToDoItem(item: ToDoModel)
+    suspend fun addToDoItem(item: ToDoModel)
 
-    fun editToDoItem(item: ToDoModel)
+    suspend fun editToDoItem(item: ToDoModel)
 
-    fun deleteToDoItem(item: ToDoModel)
+    suspend fun deleteToDoItem(item: ToDoModel)
 
-    fun getToDoItem(toDoId: Int): ToDoModel?
+    suspend fun getToDoItem(toDoId: String): ToDoModel?
 }

@@ -52,7 +52,7 @@ sealed class AppColors(
         BackPrimary =BackPrimaryDark,
         BackSecondary =BackSecondaryDark,
         BackElevated =BackElevatedDark,
-        GrayLight =GrayLightL,
+        GrayLight = GrayLightD,
         Red = Red,
         Green = Green,
         Blue = Blue,
@@ -71,3 +71,4 @@ fun appColors(darkTheme: Boolean): AppColors = when (darkTheme) {
 val LocalAppColors = staticCompositionLocalOf<AppColors> {
     error("No AppColors provided")
 }
+

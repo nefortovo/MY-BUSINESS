@@ -1,4 +1,4 @@
-package com.example.mybusiness.presentation.uicomponents.listItems.pickers
+package com.example.mybusiness.presentation.uicomponents.pickers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,17 +15,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import com.example.mybusiness.domain.model.Importance
+import com.example.mybusiness.domain.model.getLocalizedName
 import com.example.mybusiness.theme.AppResources
 
 @Composable
 fun CustomDropDownMenu(
-    items: List<String>,
-    onItemSelected: (String) -> Unit,
-    selectedItem: String,
+    items: List<Importance>,
+    onItemSelected: (Importance) -> Unit,
+    selectedItem: Importance,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
+
     var expanded by remember {
         mutableStateOf(false)
     }
@@ -35,28 +40,27 @@ fun CustomDropDownMenu(
     Box(
         modifier = modifier
             .onGloballyPositioned { coordinates ->
-                // This value is used to assign to
-                // the DropDown the same width
                 mTextFieldSize = coordinates.size.toSize()
             }
     ) {
-        Text(text = selectedItem,
+
+        Text(text = selectedItem.getLocalizedName(context),
             modifier = Modifier
-                .clickable { expanded = !expanded }
+                .clickable { expanded = !expanded },
+            color = AppResources.colors.LabelTertiary
         )
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
             modifier = Modifier
-                .background(color = AppResources.colors.White)
-                .padding(top = 8.dp)
         )
         {
             items.forEach {
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = it,
+                            text = it.getLocalizedName(context),
+                            color = AppResources.colors.LabelPrimary
                         )
                     },
                     onClick = {
@@ -64,7 +68,8 @@ fun CustomDropDownMenu(
                         onItemSelected(it)
                     },
                     modifier = Modifier
-                        .padding(8.dp)
+                        .background(AppResources.colors.BackElevated)
+                        .padding(16.dp)
                 )
             }
 

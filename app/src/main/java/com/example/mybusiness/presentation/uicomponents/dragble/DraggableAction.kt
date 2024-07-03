@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mybusiness.theme.AppResources
 
 @Composable
-fun SaveAction(modifier: Modifier) {
+fun ChangeEnabledAction(modifier: Modifier) {
     Box(
         modifier = modifier.background(AppResources.colors.Green),
         contentAlignment = Alignment.Center
@@ -32,24 +31,15 @@ fun SaveAction(modifier: Modifier) {
         ) {
             Icon(
                 modifier = Modifier
-                    .padding(top = 10.dp, bottom = 4.dp)
-                    .padding(horizontal = 20.dp)
-                    .size(22.dp),
+                    .size(48.dp)
+                    .padding(10.dp),
                 imageVector = Icons.Filled.Check,
                 contentDescription = null,
                 tint = Color.White
             )
-
-            Text(
-                text = "Save",
-                color = Color.White,
-                fontSize = 12.sp,
-            )
         }
     }
-
 }
-
 
 @Composable
 fun DeleteAction(modifier: Modifier) {
@@ -63,20 +53,12 @@ fun DeleteAction(modifier: Modifier) {
         ) {
             Icon(
                 modifier = Modifier
-                    .padding(top = 10.dp, bottom = 4.dp)
-                    .padding(horizontal = 20.dp)
-                    .size(22.dp),
+                    .size(48.dp)
+                    .padding(10.dp),
                 imageVector = Icons.Filled.Delete,
                 contentDescription = null,
                 tint = Color.White
             )
-
-            Text(
-                text = "Delete",
-                color = Color.White,
-                fontSize = 12.sp,
-            )
         }
     }
-
 }
